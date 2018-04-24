@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/excel.js"></script>
+    <script>
+    function doStuff() {
+        console.log("gay");
+        var file = document.querySelector('input[type=file]').files[0];
+          var reader  = new FileReader();
+
+          reader.addEventListener("load", function () {
+            preview.src = reader.result;
+          }, false);
+
+          if (file) {
+            reader.readAsDataURL(file);
+          }
+        $.ajax({
+          url: '/transactions',
+          type: 'POST',
+          contentType: 'application/json',
+          data: file,
+          success: function(data){
+            console.log(data);
+        }});
+      }
+    </script>
+  </head>
+  <body>
+    <p>Testing</p>
+    <form>
+      <input name="myFile" type="file">
+    </form>
+    <button id="sendData" onclick="doStuff()">Submit</button>
+  </body>
+
+
+</html>
