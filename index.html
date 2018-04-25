@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/excel.js"></script>
-  </head>
-  <body>
-    <p>Testing</p>
-    <form>
-      <input name="myFile" type="file">
-    </form>
-    <button id="sendData" onclick="doStuff()">Submit</button>
-  </body>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.6/xlsx.full.min.js"></script>
+  <script>
+  var oFile;
+  window.onload = function() {
+    document.getElementById('file-object').addEventListener("change", function(e) {
+      var files = e.target.files,file;
+      if (!files || files.length == 0) return;
+      file = files[0];
+      var fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        var filename = file.name;
+        // pre-process data
+        var binary = "";
+        var bytes = new Uint8Array(e.target.result);
+        var length = bytes.byteLength;
+        for (var i = 0; i < length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        // call 'xlsx' to read the file
+        oFile = XLSX.read(binary, {type: 'binary', cellDates:true, cellStyles:true});
+        console.log(oFile);
+      };
+      fileReader.readAsArrayBuffer(file);
+    });
+  };
+
+  $('#excel').click(function() {
+    $.ajax({
+      url: '/excel',
+      type: 'POST',
+      contentType: 'application/json',
+      data: oFile,
+      success: function(data){
+        console.log(data);
+    }});
+  });
+
+  </script>
+</head>
+<body>
+  <p>Testing</p>
+    <input id="file-object" type="file">
+    <button id="excel">Send File</button>
+</body>
 
 
 </html>

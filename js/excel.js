@@ -24,13 +24,6 @@ function doStuff() {
   };
 
   reader.readAsBinaryString(file);
+  console.log("stuff");
 };
-    $.ajax({
-      url: '/transactions',
-      type: 'POST',
-      contentType: 'application/json',
-      data: file,
-      success: function(data){
-        console.log(data);
-    }});
   }
