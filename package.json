@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ryan Min, Abhinav Chanda, Vishv Patel",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "composer-common": "^0.19.2",
+    "express": "^4.16.3",
+    "node-gyp": "^3.6.2"
+  }
 }
