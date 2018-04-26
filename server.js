@@ -1,11 +1,11 @@
 var http = require('http');
 var express = require('express');
-const BusinessNetworkConnection = require('composer-common').BusinessNetworkConnection;
+const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 var bodyParser = require('body-parser');
 var app = express();
 this.bizNetworkConnection = new BusinessNetworkConnection();
-this.businessNetworkDefinition = this.bizNetworkConnection.connect('admin@deloitte-chain');
-let factory = getFactory();
+this.bizNetworkDefinition = this.bizNetworkConnection.connect('admin@deloitte-chain');
+const factory = this.bizNetworkDefinition.getFactory();
 let transactionRegistry = this.bizNetworkConnection.getAssetRegistry('net.biz.digitalPropertyNetwork.Transactions');
 let companyRegistry = this.bizNetworkConnection.getParticipantRegistry('net.biz.digitalPropertyNetwork.Company');
 let personRegistry = this.bizNetworkConnection.getParticipantRegistry('net.biz.digitalPropertyNetwork.Person');

@@ -9,8 +9,12 @@
   "author": "Ryan Min, Abhinav Chanda, Vishv Patel",
   "license": "ISC",
   "dependencies": {
+    "composer-client": "^0.19.2",
     "composer-common": "^0.19.2",
+    "composer-runtime": "^0.19.2",
     "express": "^4.16.3",
-    "node-gyp": "^3.6.2"
+    "node-gyp": "^3.6.2",
+    "node-pre-gyp": "^0.9.1",
+    "nvm": "0.0.4"
   }
 }
