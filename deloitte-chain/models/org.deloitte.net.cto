@@ -18,6 +18,8 @@
 
 namespace org.deloitte.net
 
+// ******************** PARTICIPANTS ***********************
+
 participant Person identified by personID{
   o String personID
   o String firstName
@@ -41,35 +43,39 @@ participant Company identified by companyName {
 
 }
 
+// ******************** ACCOUNTS ***********************
+
 asset btcAccount identified by btcAccountID {
   o String btcAccountID
   --> Company owner
-  o Double balance
+  o Double balanceBTC
 }
 
 asset ethAccount identified by ethAccountID{
   o String ethAccountID
   --> Company owner
-  o Double balance
+  o Double balanceETH
 }
 
 asset usdAccount identified by usdAccountID{
   o String usdAccountID
   --> Company owner
-  o Double balance
+  o Double balanceUSD
 }
 
 asset cadAccount identified by cadAccountID{
   o String cadAccountID
   --> Company owner
-  o Double balance
+  o Double balanceCAD
 }
 
 asset gbpAccount identified by gbpAccountID{
   o String gbpAccountID
   --> Company owner 
-  o Double balance
+  o Double balanceGBP
 }
+
+// ********************TRANSACTIONS ***********************
 
 transaction btcTransaction {
   --> btcAccount from
@@ -83,8 +89,20 @@ transaction ethTransaction {
   o Double amountETH
 }
 
-/*event SampleEvent {
-  --> btcAccount asset
-  o String oldValue
-  o String newValue
-}*/
+transaction usdTransaction {
+  --> usdAccount from
+  --> usdAccount to
+  o Double amountUSD
+}
+
+transaction cadTransaction {
+  --> cadAccount from
+  --> cadAccount to
+  o Double amountCAD
+}
+
+transaction gbpTransaction {
+  --> gbpAccount from
+  --> gbpAccount to
+  o Double amountGBP
+}
