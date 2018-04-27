@@ -8,22 +8,25 @@
     "lint": "eslint .",
     "test": "nyc mocha -t 0 test/*.js && cucumber-js"
   },
-  "author": "Abhinav Chanda",
+  "author": "Abhinav Chanda, Ryan Min, Vishv Patel",
   "email": "chanda.abhinav@gmail.com,",
   "license": "Apache-2.0",
   "devDependencies": {
+    "chai": "latest",
+    "chai-as-promised": "latest",
     "composer-admin": "^0.19.2",
     "composer-cli": "^0.19.2",
     "composer-client": "^0.19.2",
     "composer-common": "^0.19.2",
     "composer-connector-embedded": "^0.19.2",
     "composer-cucumber-steps": "^0.19.2",
-    "chai": "latest",
-    "chai-as-promised": "latest",
     "cucumber": "^2.2.0",
     "eslint": "latest",
-    "nyc": "latest",
+    "express": "^4.16.3",
     "mkdirp": "latest",
-    "mocha": "latest"
+    "mocha": "latest",
+    "node-gyp": "^3.6.2",
+    "node-pre-gyp": "^0.9.1",
+    "nyc": "latest"
   }
 }

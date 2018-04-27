@@ -1,22 +1,35 @@
 var http = require('http');
 var express = require('express');
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
+const BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefinition;
 var bodyParser = require('body-parser');
 var app = express();
-let connection = new BusinessNetworkConnection();
-let definition = connection.connect('admin@deloitte-chain');
-
-const factory = definition.getFactory();
-let transactionRegistry = this.bizNetworkConnection.getAssetRegistry('org.deloitte.net.Transactions');
-let companyRegistry = this.bizNetworkConnection.getParticipantRegistry('org.deloitte.net.Company');
-let personRegistry = this.bizNetworkConnection.getParticipantRegistry('org.deloitte.net.Employee');
-
+let factory;
+let companyRegistry;
+let personRegistry;
+let businessNetworkDefinition;
 app.use('/', express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
 app.listen(3000);
+let bizNetConnection = new BusinessNetworkConnection();
+(async () => {
+  businessNetworkDefinition = await bizNetConnection.connect('admin@deloitte-chain'); 
+  factory = await businessNetworkDefinition.getFactory();
+  let transactionRegistry = await connection.getAssetRegistry('org.deloitte.net.Transactions');
+ companyRegistry = await connection.getParticipantRegistry('org.deloitte.net.Company');
+personRegistry = await connection.getParticipantRegistry('org.deloitte.net.Employee');
+
+})();
+//let businessNetworkDefinition; 
+
+app.post('/admin', function(req, res) {
+  var data = req.body.data;
+  var retVal = addCompany(data);
+  res.json(retVal);
+});
 
 app.post('/excel', function(req, res) {
   var sheet = req.body.data.sheets.sheet1;
@@ -26,13 +39,6 @@ app.post('/excel', function(req, res) {
     ledger[i] = addTransaction(sheet[i]);
   }
   res.json(ledger);
-});
-
-
-app.post('/admin', function(req, res) {
-  var data = req.body.data;
-  var retVal = addCompany(data);
-  res.json(retVal);
 });
 
 function addCompany(data) {
