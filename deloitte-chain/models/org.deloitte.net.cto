@@ -20,89 +20,78 @@ namespace org.deloitte.net
 
 // ******************** PARTICIPANTS ***********************
 
-participant Person identified by personID{
-  o String personID
+participant Employee identified by employeeID{
+  o String employeeID
   o String firstName
   o String lastName
-}
-
-participant Employee extends Person{
-  o String employeeID
   o String position
   o Double salary
-  o Company company
+  o Double btcBalance
+  o Double ethBalance
+  o Double cadBalance
+  o Double usdBalance
+  o Double gbpBalance
 }
 
-participant Company identified by companyName {
+participant Company identified by companyId {
   o String companyName
   o String companyId
-  o Employee[] employees
+  o String[] employees
   o Double netWorth
-  o String[] location
-  //o Company[] subsidiaries
-
-}
-
-// ******************** ACCOUNTS ***********************
-
-asset btcAccount identified by btcAccountID {
-  o String btcAccountID
-  --> Company owner
-  o Double balanceBTC
-}
-
-asset ethAccount identified by ethAccountID{
-  o String ethAccountID
-  --> Company owner
-  o Double balanceETH
-}
-
-asset usdAccount identified by usdAccountID{
-  o String usdAccountID
-  --> Company owner
-  o Double balanceUSD
-}
-
-asset cadAccount identified by cadAccountID{
-  o String cadAccountID
-  --> Company owner
-  o Double balanceCAD
-}
-
-asset gbpAccount identified by gbpAccountID{
-  o String gbpAccountID
-  --> Company owner 
-  o Double balanceGBP
+  o String location
+  o String description
+  o String ceo
+  o String[] subsidiaries
+  o Double btcBalance
+  o Double ethBalance
+  o Double cadBalance
+  o Double usdBalance
+  o Double gbpBalance
 }
 
 // ********************TRANSACTIONS ***********************
 
 transaction btcTransaction {
-  --> btcAccount from
-  --> btcAccount to
-  o Double amountBTC
+  --> Company from
+  --> Company to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
 }
 
 transaction ethTransaction {
-  --> ethAccount from
-  --> ethAccount to
-  o Double amountETH
+  --> Company from
+  --> Company to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
 }
 
 transaction usdTransaction {
-  --> usdAccount from
-  --> usdAccount to
-  o Double amountUSD
+  --> Company from
+  --> Company to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
 }
 
 transaction cadTransaction {
-  --> cadAccount from
-  --> cadAccount to
-  o Double amountCAD
+  --> Company from
+  --> Company to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
 }
 
 transaction gbpTransaction {
-  --> gbpAccount from
-  --> gbpAccount to
-  o Double amountGBP
+  --> Company from
+  --> Company to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
 }

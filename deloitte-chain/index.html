@@ -6,7 +6,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
   <script>
-  var roa;
+  var transactions, subsidiaries, employees;
    function handleFile(e) {
      //Get the files from Upload control
         var files = e.target.files;
@@ -24,7 +24,13 @@
                 var sheet_name_list = workbook.SheetNames;
                 sheet_name_list.forEach(function (y) { /* iterate through sheets */
                     //Convert the cell value to Json
-                    roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
+                    if(i == 0)
+                      transactions = roa;
+                    else if(i == 1)
+                      subsidiaries = roa;
+                     else if(i == 2)
+                       employees = roa;
                     if (roa.length > 0) {
                         result = roa;
                     }
@@ -41,11 +47,36 @@
     $('#files').change(handleFile);
     $('#company').click(function(e) {
       e.preventDefault();
-      var companyData = {};
-      var data ={sheet: roa, company: companyData};
+      var id = $('#id').val();
+      var name = $('#name').val();
+      var ceo = $('#ceo').val();
+      var description = $('#description').val();
+      var location = $('#location').val();
+      var netWorth = $('#cash').val();
+      var btc = $('#btc').val();
+      var eth = $('#eth').val();
+      var cad = $('#cad').val();
+      var usd = $('#usd').val();
+      var gbp = $('#gbp').val();
+      var data = {
+        id: id,
+        name: name,
+        ceo: ceo,
+        employees: employees,
+        description: description,
+        subsidiaries: subsidiaries,
+        location: location,
+        netWorth: netWorth,
+        btcBalance: btc,
+        ethBalance: eth,
+        cadBalance: cad,
+        usdBalance: usd,
+        gbpBalance: gbp
+      };
+      var data = {transactions: transactions, company: data};
       console.log(data);
       $.ajax({
-        url: '/excel',
+        url: '/admin',
         type: 'POST',
         data: data,
         success: function(data){
@@ -57,20 +88,20 @@
 </head>
 <body>
   <div class="container">
-    <p>Upload your transactions in an excel file here.</p>
+    <p>Upload your company data in an excel file here.</p>
     <input type="file" id="files" name="files"/>
-    <button id="excel">Send File</button>
-    <p>Put your company info here.</p>
     <form>
       <input id="name" type="text" placeholder="Company Name"></input><br>
       <input id="id" type="text" placeholder="Company ID"></input><br>
-      <input id="ceo-name" type="text" placeholder="CEO Name"></input><br>
-      <input id="lastName" type="text" placeholder="CEO Last Name"></input><br>
-      <input id="ceo-id" type="text" placeholder="CEO ID"></input><br>
-      <input id="ceo-salary" type="text" placeholder="CEO Salary"></input><br>
+      <input id="ceo" type="text" placeholder="CEO Name"></input><br>
       <input id="description" type="text" placeholder="Company Description"></input><br>
       <input id="location" type="text" placeholder="Company Location"></input><br>
-      <input id="cash" type="text" placeholder="Cash Balance"></input><br>
+      <input id="cash" type="text" placeholder="Equity"></input><br>
+      <input id="btc" type="text" placeholder="Bitcoin Balance"></input><br>
+      <input id="eth" type="text" placeholder="Ethereum Balance"></input><br>
+      <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
+      <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
+      <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
       <button>Add Subsidiary</button><br>
       <button id="company">Send Data</button>
   </div>

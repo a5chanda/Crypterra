@@ -5,6 +5,8 @@ const BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefi
 var bodyParser = require('body-parser');
 var app = express();
 let factory;
+var companies = [];
+var count = 0;
 var companyId;
 let companyRegistry;
 let personRegistry;
@@ -23,7 +25,7 @@ app.use(bodyParser.json());
 app.listen(3000);
 let bizNetConnection = new BusinessNetworkConnection();
 (async () => {
-  businessNetworkDefinition = await bizNetConnection.connect('../admin@deloitte-chain');
+  businessNetworkDefinition = await bizNetConnection.connect('admin@deloitte-chain');
   factory = businessNetworkDefinition.getFactory();
   bitcoinRegistry = await connection.getTransactionRegistry('org.deloitte.net.btcTransaction');
   ethereumRegistry = await connection.getTransactionRegistry('org.deloitte.net.ethTransaction');
@@ -39,7 +41,7 @@ let bizNetConnection = new BusinessNetworkConnection();
 app.post('/admin', function(req, res) {
   var companyData = req.body.company;
   companyId = addCompany(companyData);
-  var sheet = req.body.sheet;
+  var sheet = req.body.transactions;
   var length = sheet.length;
   for(var i = 0; i < length; i++) {
     addTransaction(sheet[i]);
@@ -48,7 +50,7 @@ app.post('/admin', function(req, res) {
 
 function addCompany(data) {
   var company = factory.newResource('org.deloitte.net', 'Company', data.id);
-  company.companyName = data.companyName;
+  company.companyName = data.name;
   company.companyId = data.id;
   company.netWorth = parseFloat(data.netWorth);
   company.ceo = data.ceo;
@@ -67,6 +69,8 @@ function addCompany(data) {
   for(var i = 0; i < length2; i++) {
     company.subsidiaries[i] = addCompany(data.subsidiaries[i]);
   }
+  companies[count] = company;
+  ++count;
   companyRegistry.add(company);
   return data.id;
 }
@@ -107,14 +111,14 @@ function addTransaction(data) {
   transaction.transactionID = data.Id;
   transaction.date = data.Date;
   if(data.Debit.length > 0) {
-    transaction.from = companyID;
-    transaction.to = data.ParticipantId;
-    transaction.amount = data.Debit.slice(1, -3);
+    transaction.from = findCompany(companyID);
+    transaction.to = findCompany(data.ParticipantId);
+    transaction.amount = parseFloat(data.Debit.slice(1, -3));
   }
   else {
-    transaction.from = data.ParticipantId;
-    transaction.to = companyID;
-    transaction.amount = data.Credit.slice(1, -3);
+    transaction.from = findCompany(data.ParticipantId);
+    transaction.to = findCompany(companyID);
+    transaction.amount = parseFloat(data.Credit.slice(1, -3));
   }
   transaction.description = data.Description;
   if(currency.toUpperCase() === 'BTC')
@@ -127,4 +131,12 @@ function addTransaction(data) {
     americaRegistry.add(transaction);
   else if(currency.toUpperCase() === 'GBP')
     britainRegistry.add(transaction);
+}
+
+function findCompany(id) {
+  int length = companies.length;
+  for(var i = 0; i < length; i++) {
+    if(companies[i].id === id)
+      return companies[i];
+  }
 }
