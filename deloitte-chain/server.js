@@ -16,14 +16,13 @@ app.use(bodyParser.json());
 app.listen(3000);
 let bizNetConnection = new BusinessNetworkConnection();
 (async () => {
-  businessNetworkDefinition = await bizNetConnection.connect('admin@deloitte-chain'); 
-  factory = await businessNetworkDefinition.getFactory();
+  businessNetworkDefinition = await bizNetConnection.connect('admin@deloitte-chain');
+  factory = businessNetworkDefinition.getFactory();
   let transactionRegistry = await connection.getAssetRegistry('org.deloitte.net.Transactions');
- companyRegistry = await connection.getParticipantRegistry('org.deloitte.net.Company');
-personRegistry = await connection.getParticipantRegistry('org.deloitte.net.Employee');
-
+  companyRegistry = await connection.getParticipantRegistry('org.deloitte.net.Company');
+  personRegistry = await connection.getParticipantRegistry('org.deloitte.net.Employee');
 })();
-//let businessNetworkDefinition; 
+//let businessNetworkDefinition;
 
 app.post('/admin', function(req, res) {
   var data = req.body.data;
