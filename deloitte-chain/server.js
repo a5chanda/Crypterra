@@ -1,7 +1,6 @@
 var http = require('http');
 var express = require('express');
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
-const BusinessNetworkDefinition = require('composer-common').BusinessNetworkDefinition;
 var bodyParser = require('body-parser');
 var app = express();
 let factory;
@@ -23,9 +22,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.listen(3000);
-let bizNetConnection = new BusinessNetworkConnection();
+let connection = new BusinessNetworkConnection();
 (async () => {
-  businessNetworkDefinition = await bizNetConnection.connect('admin@deloitte-chain');
+  businessNetworkDefinition = await connection.connect('admin@deloitte-net');
   factory = businessNetworkDefinition.getFactory();
   bitcoinRegistry = await connection.getTransactionRegistry('org.deloitte.net.btcTransaction');
   ethereumRegistry = await connection.getTransactionRegistry('org.deloitte.net.ethTransaction');
@@ -39,20 +38,20 @@ let bizNetConnection = new BusinessNetworkConnection();
 });
 
 app.post('/admin', function(req, res) {
-  var companyData = req.body.company;
+  var companyData = req.body;
+  console.log(companyData);
   companyId = addCompany(companyData);
-  var sheet = req.body.transactions;
-  var length = sheet.length;
-  for(var i = 0; i < length; i++) {
-    addTransaction(sheet[i]);
-  }
+ // var sheet = req.body.transactions;
+  //var length = sheet.length;
+ // for(var i = 0; i < length; i++) {
+ //   addTransaction(sheet[i]);
+ // }
 });
 
 function addCompany(data) {
   var company = factory.newResource('org.deloitte.net', 'Company', data.id);
   company.companyName = data.name;
   company.companyId = data.id;
-  company.netWorth = parseFloat(data.netWorth);
   company.ceo = data.ceo;
   company.description = data.description;
   company.location = data.location;
@@ -61,17 +60,22 @@ function addCompany(data) {
   company.cadBalance = parseFloat(data.cadBalance);
   company.usdBalance = parseFloat(data.usdBalance);
   company.gbpBalance = parseFloat(data.gbpBalance);
-  var length = company.employees.length;
+  var length = 0;//company.employees.length;
+  company.employees = ['5'];
   for(var i = 0; i < length; i++) {
     company.employees[i] = addEmployee(data.employees[i]);
   }
-  var length2 = data.subsidiaries.length;
+  var length2 = 0;//data.subsidiaries.length;
+  company.subsidiaries = ['5'];
   for(var i = 0; i < length2; i++) {
     company.subsidiaries[i] = addCompany(data.subsidiaries[i]);
   }
   companies[count] = company;
   ++count;
-  companyRegistry.add(company);
+  companyRegistry.add(company).catch(function(err) {
+    console.log(err);
+  });
+  console.log(company);
   return data.id;
 }
 
@@ -87,10 +91,12 @@ function addEmployee(data) {
   employee.cadBalance = parseFloat(data.cadBalance);
   employee.usdBalance = parseFloat(data.usdBalance);
   employee.gbpBalance = parseFloat(data.gbpBalance);
-  employeeRegistry.add(employee);
+  employeeRegistry.add(employee).catch(function(err) {
+    console.log(err);
+  });
   return data.Id;
 }
-
+/*
 function addTransaction(data) {
   var transaction;
   var currency;
@@ -140,3 +146,4 @@ function findCompany(id) {
       return companies[i];
   }
 }
+*/

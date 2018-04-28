@@ -1,0 +1,104 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Write your model definitions here
+ */
+
+namespace org.deloitte.net
+
+// ******************** PARTICIPANTS ***********************
+
+participant Employee identified by employeeID{
+  o String employeeID
+  o String firstName
+  o String lastName
+  o String position
+  o Double salary
+}
+
+participant Company identified by companyId {
+  o String companyName
+  o String companyId
+  o String[] employees
+  o String location
+  o String description
+  o String ceo
+  o String[] subsidiaries
+}
+
+// ******************** ACCOUNTS ***********************
+
+enum Owner{
+  o Company
+  o Employee
+}
+
+asset Account identified by AccountID {
+  o String AccountID //Account ID: 'a' + companyID
+  o Owner owner
+  o Double balanceBTC
+  o Double balanceETH
+  o Double balanceUSD
+  o Double balanceCAD
+  o Double balanceGBP
+}
+
+
+// ********************TRANSACTIONS ***********************
+
+transaction btcTransaction {
+  --> Account from
+  --> Account to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
+}
+
+transaction ethTransaction {
+  --> Account from
+  --> Account to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
+}
+
+transaction usdTransaction {
+  --> Account from
+  --> Account to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
+}
+
+transaction cadTransaction {
+  --> Account from
+  --> Account to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
+}
+
+transaction gbpTransaction {
+  --> Account from
+  --> Account to
+  o Double amount
+  o String transactionID
+  o String date
+  o String description
+}

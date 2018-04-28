@@ -59,12 +59,13 @@
       var usd = $('#usd').val();
       var gbp = $('#gbp').val();
       var data = {
+        transactions: [],
         id: id,
         name: name,
         ceo: ceo,
-        employees: employees,
+        employees: [],
         description: description,
-        subsidiaries: subsidiaries,
+        subsidiaries: [],
         location: location,
         netWorth: netWorth,
         btcBalance: btc,
@@ -73,7 +74,6 @@
         usdBalance: usd,
         gbpBalance: gbp
       };
-      var data = {transactions: transactions, company: data};
       console.log(data);
       $.ajax({
         url: '/admin',
@@ -96,7 +96,6 @@
       <input id="ceo" type="text" placeholder="CEO Name"></input><br>
       <input id="description" type="text" placeholder="Company Description"></input><br>
       <input id="location" type="text" placeholder="Company Location"></input><br>
-      <input id="cash" type="text" placeholder="Equity"></input><br>
       <input id="btc" type="text" placeholder="Bitcoin Balance"></input><br>
       <input id="eth" type="text" placeholder="Ethereum Balance"></input><br>
       <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>

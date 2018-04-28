@@ -35,7 +35,7 @@ rule OwnerHasFullAccessToTheirAssets {
     description: "Allow all participants full access to their assets"
     participant(p): "org.deloitte.net.Company"
     operation: ALL
-    resource(r): "org.deloitte.net.btcAccount"
+    resource(r): "org.deloitte.net.Account"
     condition: (r.owner.getIdentifier() === p.getIdentifier())
     action: ALLOW
 }
