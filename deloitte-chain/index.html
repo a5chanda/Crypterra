@@ -30,7 +30,6 @@
                     }
                 });
                //Get the first column first cell value
-                alert(result[0].Column1);
             };
             reader.readAsArrayBuffer(f);
         }
@@ -40,13 +39,15 @@
   //Change event to dropdownlist
   $(document).ready(function(){
     $('#files').change(handleFile);
-    $('#excel').click(function(e) {
+    $('#company').click(function(e) {
       e.preventDefault();
+      var companyData = {};
+      var data ={sheet: roa, company: companyData};
+      console.log(data);
       $.ajax({
         url: '/excel',
         type: 'POST',
-        datatype: 'json',
-        data: JSON.stringify(roa),
+        data: data,
         success: function(data){
           console.log(data);
       }});
