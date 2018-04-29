@@ -8,6 +8,7 @@
   <script>
   // Data to be read in from excel file
   var transactions, subsidiaries, employees;
+  var count = 0;
   /**
    * Read in the uploaded excel file to a JSON object using SheetJS library
    * @param {Event} e The event associated with the file upload
@@ -29,11 +30,12 @@
                     // Convert the cell value to Json
                     var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
                     // Read sheets into different objects depending on sheet number
-                    if(y == 0)
+                    ++count;
+                    if(count == 1)
                       transactions = roa;
-                    else if(y == 1)
+                    else if(count == 2)
                       subsidiaries = roa;
-                     else if(y == 2)
+                     else if(count == 3)
                        employees = roa;
                     if (roa.length > 0) {
                         result = roa;
@@ -53,21 +55,31 @@
      * @param {Event} e The event associated with the button click
       */
     $('#company').click(function(e) {
-      e.preventDefault();
+      e.preventDefault()
+      // Get user input and bind them to sent data
       var id = $('#id').val();
       var name = $('#name').val();
       var ceo = $('#ceo').val();
       var description = $('#description').val();
       var location = $('#location').val();
-      var netWorth = $('#cash').val();
       var btc = $('#btc').val();
       var eth = $('#eth').val();
       var cad = $('#cad').val();
       var usd = $('#usd').val();
       var gbp = $('#gbp').val();
+      // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
+      if(subsidiaries == null)
+        subsidiaries = [];
+      if(transaction == null)
+        transaction = [];
+      if(employees == null)
+        employees = [];
       // Prevent nested subsidiaries and employees for simplicity (proof of concept)
-      subsidiaries.subsidiaries = [];
-      subsidiaries.employees = [];
+      var length = subsidiaries.length;
+      for(var i = 0; i < length; i++) {
+        subsidiaries[i].subsidiaries = [];
+        subsidiaries[i].employees = [];
+      }
       var data = {
         transactions: transactions,
         ID: id,
@@ -77,13 +89,13 @@
         description: description,
         subsidiaries: subsidiaries,
         location: location,
-        netWorth: netWorth,
         btcBalance: btc,
         ethBalance: eth,
         cadBalance: cad,
         usdBalance: usd,
         gbpBalance: gbp
       };
+      console.log(data);
       $.ajax({
         url: '/admin',
         type: 'POST',

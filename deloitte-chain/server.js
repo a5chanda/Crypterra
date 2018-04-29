@@ -116,7 +116,7 @@ async function addEmployee(data) {
   employee.firstName = data.firstName;
   employee.lastName = data.lastName;
   employee.position = data.Position;
-  employee.salary = parseFloat(data.Salary);
+  employee.salary = parseFloat(data.Salary.replace(/,/g , ''));
   account.owner = 'Employee';
   // Link owning company with account using identifier
   employee.acc = await factory.newRelationship(NS, 'Account', account.$identifier);
@@ -137,7 +137,8 @@ async function addEmployee(data) {
 async function addTransaction(data) {
   var transaction;
   var currency;
-  if(data.Debit.length > 0)
+  // Transfer between different accounts based on debit & credit transaction entries
+  if(data.Credit == null)
     currency = data.Debit.slice(-3);
   else
     currency = data.Credit.slice(-3);
@@ -155,7 +156,7 @@ async function addTransaction(data) {
   transaction.transactionID = data.ID;
   transaction.date = data.Date;
   transaction.description = data.Description;
-  if(data.Debit.length > 0) { // Transfer between different accounts based on debit & credit transaction entries
+  if(data.Credit == null) {
     transaction.from = await factory.newRelationship(NS, 'Account', accountID);
     transaction.to = await factory.newRelationship(NS, 'Account', data.participantID);
     transaction.amount = parseFloat(data.Debit.slice(1, -3).replace(/,/g , '')); // Remove currency and commas from number
