@@ -70,8 +70,8 @@
       // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
       if(subsidiaries == null)
         subsidiaries = [];
-      if(transaction == null)
-        transaction = [];
+      if(transactions == null)
+        transactions = [];
       if(employees == null)
         employees = [];
       // Prevent nested subsidiaries and employees for simplicity (proof of concept)
@@ -81,13 +81,13 @@
         subsidiaries[i].employees = [];
       }
       var data = {
-        transactions: transactions,
+        transactions: JSON.stringify(transactions),
         ID: id,
         name: name,
         ceo: ceo,
-        employees: employees,
+        employees: JSON.stringify(employees),
         description: description,
-        subsidiaries: subsidiaries,
+        subsidiaries: JSON.stringify(subsidiaries),
         location: location,
         btcBalance: btc,
         ethBalance: eth,

@@ -39,13 +39,14 @@ app.listen(PORT);
 // Listen for company data from HTML file
 app.post('/admin', function(req, res) {
   var companyData = req.body;
-  console.log(companyData);
+ // console.log(companyData);
   // Stores Account ID numbers as Company ID numbers preceded by an 'a'
   accountID = 'a' + addCompany(companyData);
-  var sheet = req.body.transactions;
+  var sheet = companyData.transactions;
+  console.log(companyData.transactions);
   var length = sheet.length;
   for(var i = 0; i < length; i++) {
-    addTransaction(sheet[i]);
+    //addTransaction(sheet[i]);
   }
   res.end('Success!');
 });
