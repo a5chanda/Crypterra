@@ -41,14 +41,14 @@ app.post('/admin', function(req, res) {
   var companyData = req.body;
  // console.log(companyData);
   // Stores Account ID numbers as Company ID numbers preceded by an 'a'
-  accountID = 'a' + addCompany(companyData);
+  var companyID = addCompany(companyData);
+  accountID = 'a' + companyID;
   var sheet = companyData.transactions;
-  console.log(companyData.transactions);
   var length = sheet.length;
   for(var i = 0; i < length; i++) {
-    //addTransaction(sheet[i]);
+    addTransaction(JSON.parse(sheet)[i]);
   }
-  res.end('Success!');
+  res.end(companyID);
 });
 
 /**
@@ -76,12 +76,12 @@ async function addCompany(data) {
   var length = company.employees.length;
   for(var i = 0; i < length; i++) {
     // Keep record of employee ID numbers
-    company.employees[i] = addEmployee(data.employees[i]);
+    company.employees[i] = addEmployee(JSON.parse(data.employees)[i]);
   }
   var length2 = data.subsidiaries.length;
   for(var i = 0; i < length2; i++) {
     // Keep record of subsidiary ID numbers
-    company.subsidiaries[i] = addCompany(data.subsidiaries[i]);
+    company.subsidiaries[i] = addCompany(JSON.parse(data.subsidiaries)[i]);
   }
   account.owner = 'Company';
   // Link owning company with account using identifier

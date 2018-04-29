@@ -100,9 +100,15 @@
         url: '/admin',
         type: 'POST',
         data: data,
-        success: function(data){
-          console.log(data);
+        success: function(id){
+          console.log(id);
           // Load blockchain user interface upon data upload
+          $.ajax({
+            url: 'http://localhost:4200/portal',
+            type: 'POST',
+            data: id,
+            success: function(data){
+          }});
           window.open('http://localhost:4200', '_self');
       }});
       // Queue loading screen to prevent further user input and server overload
