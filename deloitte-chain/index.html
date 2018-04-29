@@ -60,7 +60,7 @@
       var gbp = $('#gbp').val();
       var data = {
         transactions: [],
-        id: id,
+        ID: id,
         name: name,
         ceo: ceo,
         employees: [],
@@ -81,6 +81,7 @@
         data: data,
         success: function(data){
           console.log(data);
+          window.open('blockchain.html', '_self');
       }});
     });
   });
@@ -101,7 +102,6 @@
       <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
       <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
       <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
-      <button>Add Subsidiary</button><br>
       <button id="company">Send Data</button>
   </div>
 </body>

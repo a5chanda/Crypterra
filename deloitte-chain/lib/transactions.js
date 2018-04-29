@@ -48,12 +48,12 @@ function btcTransaction(transaction){
  * @transaction
  */
 function ethTransaction(transaction) {
-    if(transaction.from.balance < transaction.amountETH){
+    if(transaction.from.balance < transaction.amount){
         throw new Error ("Insufficient funds");
     }
     else{
-        transaction.from.balanceETH -= transaction.amountETH;
-        transaction.to.balanceETH += transaction.amountETH;
+        transaction.from.balanceETH -= transaction.amount;
+        transaction.to.balanceETH += transaction.amount;
 
         return getAssetRegistry('org.deloitte.net.Account').then (function (assetRegistry) {
             return assetRegistry.update(transaction.from);
@@ -74,12 +74,12 @@ function ethTransaction(transaction) {
  * @transaction
  */
 function usdTransaction(transaction) {
-    if(transaction.from.balance < transaction.amountUSD){
+    if(transaction.from.balance < transaction.amount){
         throw new Error ("Insufficient funds");
     }
     else{
-        transaction.from.balanceUSD -= transaction.amountUSD;
-        transaction.to.balanceUSD += transaction.amountUSD;
+        transaction.from.balanceUSD -= transaction.amount;
+        transaction.to.balanceUSD += transaction.amount;
 
         return getAssetRegistry('org.deloitte.net.Account').then (function (assetRegistry) {
             return assetRegistry.update(transaction.from);
@@ -100,12 +100,12 @@ function usdTransaction(transaction) {
  * @transaction
  */
 function cadTransaction(transaction) {
-    if(transaction.from.balance < transaction.amountCAD){
+    if(transaction.from.balance < transaction.amount){
         throw new Error ("Insufficient funds");
     }
     else{
-        transaction.from.balanceCAD -= transaction.amountCAD;
-        transaction.to.balanceCAD += transaction.amountCAD;
+        transaction.from.balanceCAD -= transaction.amount;
+        transaction.to.balanceCAD += transaction.amount;
 
         return getAssetRegistry('org.deloitte.net.Account').then (function (assetRegistry) {
             return assetRegistry.update(transaction.from);
@@ -125,12 +125,12 @@ function cadTransaction(transaction) {
  * @transaction
  */
 function gbpTransaction(transaction) {
-    if(transaction.from.balance < transaction.amountGBP){
+    if(transaction.from.balance < transaction.amount){
         throw new Error ("Insufficient funds");
     }
     else{
-        transaction.from.balanceGBP -= transaction.amountGBP;
-        transaction.to.balanceGBP += transaction.amountGBP;
+        transaction.from.balanceGBP -= transaction.amount;
+        transaction.to.balanceGBP += transaction.amount;
 
         return getAssetRegistry('org.deloitte.net.Account').then (function (assetRegistry) {
             return assetRegistry.update(transaction.from);

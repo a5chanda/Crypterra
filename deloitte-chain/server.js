@@ -3,18 +3,11 @@ var express = require('express');
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 var bodyParser = require('body-parser');
 var app = express();
-let factory;
-var companies = [];
+var accounts = [];
 var count = 0;
-var companyId;
-let companyRegistry;
-let personRegistry;
-let businessNetworkDefinition;
-let bitcoinRegistry;
-let ethereumRegistry;
-let canadaRegistry;
-let americaRegistry;
-let britainRegistry;
+var NS = 'org.deloitte.net';
+let factory, accountId, businessNetworkDefinition, bitcoinRegistry,
+ethereumRegistry, canadaRegistry, americaRegistry, britainRegistry, accountRegistry,  companyRegistry, personRegistry;
 
 app.use('/', express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({
@@ -33,6 +26,7 @@ let connection = new BusinessNetworkConnection();
   britainRegistry = await connection.getTransactionRegistry('org.deloitte.net.gbpTransaction');
   companyRegistry = await connection.getParticipantRegistry('org.deloitte.net.Company');
   personRegistry = await connection.getParticipantRegistry('org.deloitte.net.Employee');
+  accountRegistry = await connection.getAssetRegistry('org.deloitte.net.Account');
 })().catch(function(err) {
   console.log(err);
 });
@@ -40,64 +34,84 @@ let connection = new BusinessNetworkConnection();
 app.post('/admin', function(req, res) {
   var companyData = req.body;
   console.log(companyData);
-  companyId = addCompany(companyData);
- // var sheet = req.body.transactions;
-  //var length = sheet.length;
- // for(var i = 0; i < length; i++) {
- //   addTransaction(sheet[i]);
- // }
+  accountID = 'a' + addCompany(companyData);
+  /*var sheet = req.body.transactions;
+  var length = sheet.length;
+  for(var i = 0; i < length; i++) {
+    addTransaction(sheet[i]);
+  }*/
+  res.end('Success!');
 });
 
-function addCompany(data) {
-  var company = factory.newResource('org.deloitte.net', 'Company', data.id);
+async function addCompany(data) {
+  var accountID = 'a' + data.ID;
+  var account = await factory.newResource(NS, 'Account', accountID);
+  account.AccountID = accountID;
+  account.ownerID = data.ID;
+  account.balanceBTC = parseFloat(data.btcBalance);
+  account.balanceETH = parseFloat(data.ethBalance);
+  account.balanceCAD = parseFloat(data.cadBalance);
+  account.balanceUSD = parseFloat(data.usdBalance);
+  account.balanceGBP = parseFloat(data.gbpBalance);
+  var company = await factory.newResource(NS, 'Company', data.ID);
   company.companyName = data.name;
-  company.companyId = data.id;
+  company.companyID = data.ID;
   company.ceo = data.ceo;
   company.description = data.description;
   company.location = data.location;
-  company.btcBalance = parseFloat(data.btcBalance);
-  company.ethBalance = parseFloat(data.ethBalance);
-  company.cadBalance = parseFloat(data.cadBalance);
-  company.usdBalance = parseFloat(data.usdBalance);
-  company.gbpBalance = parseFloat(data.gbpBalance);
   var length = 0;//company.employees.length;
-  company.employees = ['5'];
+  company.employees = [];
   for(var i = 0; i < length; i++) {
     company.employees[i] = addEmployee(data.employees[i]);
   }
   var length2 = 0;//data.subsidiaries.length;
-  company.subsidiaries = ['5'];
+  company.subsidiaries = [];
   for(var i = 0; i < length2; i++) {
     company.subsidiaries[i] = addCompany(data.subsidiaries[i]);
   }
-  companies[count] = company;
+  account.owner = 'Company';
+  company.acc = await factory.newRelationship(NS, 'Account', account.$identifier);;
+  accounts[count] = account;
   ++count;
-  companyRegistry.add(company).catch(function(err) {
+  await companyRegistry.add(company).catch(function(err) {
     console.log(err);
   });
-  console.log(company);
-  return data.id;
+  await accountRegistry.add(account).catch(function(err) {
+    console.log(err);
+  });
+  return data.ID;
 }
 
-function addEmployee(data) {
-  var employee = factory.newResource('org.deloitte.net', 'Employee', data.Id);
-  employee.employeeID = data.Id;
+async function addEmployee(data) {
+  var account = await factory.newResource(NS, 'Account', accountID);
+  var accountID = 'a' + data.ID;
+  account.ownerID = data.ID;
+  account.AccountID = accountID;
+  account.balanceBTC = parseFloat(data.btcBalance);
+  account.balanceETH = parseFloat(data.ethBalance);
+  account.balanceCAD = parseFloat(data.cadBalance);
+  account.balanceUSD = parseFloat(data.usdBalance);
+  account.balanceGBP = parseFloat(data.gbpBalance);
+  var employee = await factory.newResource(NS, 'Employee', data.ID);
+  employee.employeeID = data.ID;
   employee.firstName = data.firstName;
   employee.lastName = data.lastName;
   employee.position = data.Position;
   employee.salary = parseFloat(data.Salary);
-  employee.btcBalance = parseFloat(data.btcBalance);
-  employee.ethBalance = parseFloat(data.ethBalance);
-  employee.cadBalance = parseFloat(data.cadBalance);
-  employee.usdBalance = parseFloat(data.usdBalance);
-  employee.gbpBalance = parseFloat(data.gbpBalance);
-  employeeRegistry.add(employee).catch(function(err) {
+  account.owner = 'Employee';
+  company.acc = await factory.newRelationship(NS, 'Account', account.$identifier);
+  accounts[count] = account;
+  ++count;
+  await employeeRegistry.add(employee).catch(function(err) {
     console.log(err);
   });
-  return data.Id;
+  await accountRegistry.add(account).catch(function(err) {
+    console.log(err);
+  });
+  return data.ID;
 }
-/*
-function addTransaction(data) {
+
+async function addTransaction(data) {
   var transaction;
   var currency;
   if(data.Debit.length > 0)
@@ -105,45 +119,36 @@ function addTransaction(data) {
   else
     currency = data.Credit.slice(-3);
   if(currency.toUpperCase() === 'BTC')
-    transaction = factory.newResource('org.deloitte.net', 'btcTransaction', data.Id);
+    transaction = await factory.newResource(NS, 'btcTransaction', data.ID);
   else if(currency.toUpperCase() === 'ETH')
-    transaction = factory.newResource('org.deloitte.net', 'ethTransaction', data.Id);
+    transaction = await factory.newResource(NS, 'ethTransaction', data.ID);
   else if(currency.toUpperCase() === 'CAD')
-    transaction = factory.newResource('org.deloitte.net', 'cadTransaction', data.Id);
+    transaction = await factory.newResource(NS, 'cadTransaction', data.ID);
   else if(currency.toUpperCase() === 'USD')
-    transaction = factory.newResource('org.deloitte.net', 'usdTransaction', data.Id);
+    transaction = await factory.newResource(NS, 'usdTransaction', data.ID);
   else if(currency.toUpperCase() === 'GBP')
-    transaction = factory.newResource('org.deloitte.net', 'gbpTransaction', data.Id);
-  transaction.transactionID = data.Id;
+    transaction = await factory.newResource(NS, 'gbpTransaction', data.ID);
+  transaction.transactionID = data.ID;
   transaction.date = data.Date;
+  transaction.description = data.Description;
   if(data.Debit.length > 0) {
-    transaction.from = findCompany(companyID);
-    transaction.to = findCompany(data.ParticipantId);
+    transaction.from = await factory.newRelationship(NS, 'Account', accountID);
+    transaction.to = await factory.newRelationship(NS, 'Account', data.participantID);
     transaction.amount = parseFloat(data.Debit.slice(1, -3));
   }
   else {
-    transaction.from = findCompany(data.ParticipantId);
-    transaction.to = findCompany(companyID);
+    transaction.from = await factory.newRelationship(NS, 'Account', data.participantID);
+    transaction.to = await factory.newRelationship(NS, 'Account', data.accountID);
     transaction.amount = parseFloat(data.Credit.slice(1, -3));
   }
-  transaction.description = data.Description;
   if(currency.toUpperCase() === 'BTC')
-    bitcoinRegistry.add(transaction);
+    await bitcoinRegistry.add(transaction);
   else if(currency.toUpperCase() === 'ETH')
-    ethereumRegistry.add(transaction);
+    await ethereumRegistry.add(transaction);
   else if(currency.toUpperCase() === 'CAD')
-    canadaRegistry.add(transaction);
+    await canadaRegistry.add(transaction);
   else if(currency.toUpperCase() === 'USD')
-    americaRegistry.add(transaction);
+    await americaRegistry.add(transaction);
   else if(currency.toUpperCase() === 'GBP')
-    britainRegistry.add(transaction);
+    await britainRegistry.add(transaction);
 }
-
-function findCompany(id) {
-  int length = companies.length;
-  for(var i = 0; i < length; i++) {
-    if(companies[i].id === id)
-      return companies[i];
-  }
-}
-*/

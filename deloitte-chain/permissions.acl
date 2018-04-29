@@ -19,17 +19,26 @@ rule EverybodyCanReadEverything {
     description: "Allow all participants read access to all resources"
     participant: "org.deloitte.net.Company"
     operation: READ
-    resource: "org.deloitte.net.*"
+    resource: "org.deloitte.net.Company"
     action: ALLOW
 }
 
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
+rule CompanyCanSubmitTransactions {
+    description: "Allow all companies to submit transactions"
     participant: "org.deloitte.net.Company"
     operation: CREATE
-    resource: "org.deloitte.net.btcTransaction"
+    resource: "**"
     action: ALLOW
 }
+
+rule EmployeeCanSubmitTransactions {
+    description: "Allow all employees to submit transactions"
+    participant: "org.deloitte.net.Employee"
+    operation: CREATE
+    resource: "**"
+    action: ALLOW
+}
+
 
 rule OwnerHasFullAccessToTheirAssets {
     description: "Allow all participants full access to their assets"

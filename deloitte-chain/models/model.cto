@@ -26,16 +26,18 @@ participant Employee identified by employeeID{
   o String lastName
   o String position
   o Double salary
+  --> Account acc
 }
 
-participant Company identified by companyId {
+participant Company identified by companyID {
   o String companyName
-  o String companyId
+  o String companyID
   o String[] employees
   o String location
   o String description
   o String ceo
   o String[] subsidiaries
+  --> Account acc
 }
 
 // ******************** ACCOUNTS ***********************
@@ -48,6 +50,7 @@ enum Owner{
 asset Account identified by AccountID {
   o String AccountID //Account ID: 'a' + companyID
   o Owner owner
+  o String ownerID
   o Double balanceBTC
   o Double balanceETH
   o Double balanceUSD
