@@ -139,7 +139,7 @@ async function addEmployee(data) {
     console.log(err);
   });
   return await connection.getAssetRegistry(NS + '.Account').then(async function(registry) {
-    return await registry.add(account);
+    return registry.add(account);
   });
 }
 

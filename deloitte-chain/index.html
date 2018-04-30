@@ -4,43 +4,51 @@
     <title>Deloitte Crypto - Demo</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 </head>
 <body>
-    <div class="nav">
-        <a href="#" class="logo"><img src="images/Untitled-1.png" alt="pig logo" width="80px"></a>
-        <div class="textright">
-            <a href="#">Info</a>
-            <a href="#">Participants</a>
-            <a href="#">Transactions</a>
-            <a href="#">Assets</a>
+  <div class="wrapper">
+    <div class="container">
+      <div class="nav">
+          <a href="#" class="logo"><img src="images/Untitled-1.png" alt="pig logo" width="80px"></a>
+          <div class="textright">
+              <a href="data.html">Sign Up</a>
+              <a href="http://localhost:4200/Company">Companies</a>
+              <a href="http://localhost:4200/Employee">Employees</a>
+              <a href="http://localhost:4200/Transactions">Transactions</a>
+              <a href="http://localhost:4200/Account">Accounts</a>
+          </div>
+      </div> <!-- End Nav -->
+      <div class="landing">
+        <div class="landingLeft col-xs-6">
+        <img id="centerPig" src="images/Untitled-1.png" alt="pig logo" width="280px">
         </div>
-    </div> <!-- End Nav -->
-    <div class="landing">
-        <div class="landingWrapper clear fix">
-            <div class="landingLeft">
-            <img src="images/Untitled-1.png" alt="pig logo" width="280px">
-            </div>
-            <div class="landingRight">
-                <h1 class="bold">Blockchain Solution</h1>
-                <p>cooooooooooooooooooooooooool</p>
-                <a href="data.html" class="btn">Get Started</a>
-            </div>
-        </div>   
-    </div> <!-- End Landing -->
-    <div class="mobileApp">
-        <div class="mobileAppWrapper clearfix">
-            <div class="mobileLeft">
-                <h1 class="bold">Write something here</h1>
-                <p>good stuff wow look at this blockchain. <br>avaliable now</p>
-                <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
-                <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
-            </div>
-            <div class="mobileRight">
-                <img src="images/Untitled-1.png" alt="pig logo" width="400px">
+        <div class="landingRight col-xs-6">
+            <strong><h1 class="centerText">Blockchain Solution</h1></strong>
+            <p  class="centerText">cooooooooooooooooooooooooool</p>
+            <div id="buttonDiv">
+              <a href="data.html" class="btn">Get Started</a>
             </div>
         </div>
-    </div> <!-- End !!!!!!!!!!!!idk -->
+      </div> <!-- End Landing -->
+    </div>
+  </div>
+    <div class="container">
+      <div class="mobileApp">
+          <div class="mobileAppWrapper clearfix">
+              <div class="mobileLeft col-xs-6">
+                  <h1 class="bold">Write something here</h1>
+                  <p>good stuff wow look at this blockchain. <br>avaliable now</p>
+                  <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
+                  <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
+              </div>
+              <div class="mobileRight col-xs-6">
+                  <img src="images/Untitled-1.png" alt="pig logo" width="400px">
+              </div>
+          </div>
+      </div> <!-- End !!!!!!!!!!!!idk -->
+    </div>
     <div class="footer">
         <p>Copyright 2018 CUTC</p>
         <a href="#" class="bold">Terms</a>

@@ -3,10 +3,7 @@ html {
     font-weight: 300;
 }
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 100%;
     vertical-align: baseline;
 }
@@ -17,15 +14,29 @@ h1 {
     font-size: 23px;
     color: white;
 }
+#centerPig {
+  display: block;
+  margin: 0 auto;
+}
+#buttonDiv{
+    height: 100%;
+    width: 100%;
+}
+.centerText {
+  display: block;
+  text-align: center;
+}
 .clearfix:after {
     display: block;
     content: " ";
     clear: both;
 }
+.container {
+  height: 100%;
+}
 .nav {
     width: 90%;
     margin: auto;
-    background-color: aqua;
     display: flex;
     height: 60px;
 }
@@ -33,19 +44,30 @@ h1 {
     flex: 1;
 }
 .nav a, .nav a img {
-    margin: 0 0.5em;
-    color: brown;
+    margin: 0 1em;
+    color: white;
     text-decoration: none;
     vertical-align: middle;
     line-height: 60px;
-    font-weight: 300;
+    font-weight: 900;
+    transition: 0.1s linear;
 }
-.landing {
-    background-image: url('../images/room-colour-meanings.png');
+.nav a:hover, .btn:hover {
+  transition: 0.1s linear;
+  color: #CCC!important;
+  text-decoration: none;
+}
+.wrapper {
+    background-image: url('../images/artboard.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    margin-top: -60px;
+    width: auto;
+    height: 100vh;
+}
+.landing {
+  overflow:hidden;
+  transform: translateY(33vh);
 }
 .landingWrapper {
     width: 80%;
@@ -54,12 +76,8 @@ h1 {
 }
 .landingWrapper img {
     margin-left: 15%;
-    float:left;
 }
-.landingRight {
-    float:left;
-    margin: 4em 0 0 0;
-}
+
 .landingRight p {
     color: yellow;
     font-size: 20px;
@@ -70,11 +88,15 @@ h1 {
     border-radius: 3px;
     width: 100px;
     text-align: center;
-    display: block;
+    display: block!important;
     text-decoration: none;
-    color:blueviolet;
     margin-top: 20px;
+    color:white;
+    margin: 0 auto;
+    transition: 0.1s linear;
 }
+
+/*
 .mobileAppWrapper {
     width: 80%;
     margin: -8em auto 0 auto;
@@ -95,8 +117,8 @@ h1 {
     color:darkolivegreen;
 }
 .mobileLeft a img {
-    margin-top:20px; 
-}
+    margin-top:20px;
+}*/
 .last {
     margin-left: 1.5em;
 }
