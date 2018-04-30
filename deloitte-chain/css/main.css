@@ -3,7 +3,7 @@ html {
     font-weight: 300;
 }
 * {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 100%;
     vertical-align: baseline;
 }
@@ -22,6 +22,14 @@ h1 {
     height: 100%;
     width: 100%;
 }
+#title {
+  font-size: 42pt;
+  color:white;
+}
+#subtitle {
+  color: white;
+  margin: 30px;
+}
 .centerText {
   display: block;
   text-align: center;
@@ -31,8 +39,9 @@ h1 {
     content: " ";
     clear: both;
 }
-.container {
+.container-fluid {
   height: 100%;
+  width: 70%;
 }
 .nav {
     width: 90%;
@@ -52,10 +61,16 @@ h1 {
     font-weight: 900;
     transition: 0.1s linear;
 }
-.nav a:hover, .btn:hover {
+.nav a:hover{
   transition: 0.1s linear;
   color: #CCC!important;
   text-decoration: none;
+}
+.btn:hover {
+  transition: 0.1s linear;
+  color:white!important;
+  text-decoration: none;
+  background-color:#00b300;
 }
 .wrapper {
     background-image: url('../images/artboard.png');
@@ -67,7 +82,7 @@ h1 {
 }
 .landing {
   overflow:hidden;
-  transform: translateY(33vh);
+  transform: translateY(30vh);
 }
 .landingWrapper {
     width: 80%;
@@ -77,16 +92,11 @@ h1 {
 .landingWrapper img {
     margin-left: 15%;
 }
-
-.landingRight p {
-    color: yellow;
-    font-size: 20px;
-}
 .btn {
-    background-color: #034667;
-    padding: 0.75em 2em;
-    border-radius: 3px;
-    width: 100px;
+    background-color: #33cc33;
+    border-radius: 20px!important;
+    width: 150px;
+    padding: 12px 20px!important;
     text-align: center;
     display: block!important;
     text-decoration: none;
@@ -95,46 +105,6 @@ h1 {
     margin: 0 auto;
     transition: 0.1s linear;
 }
-
-/*
-.mobileAppWrapper {
-    width: 80%;
-    margin: -8em auto 0 auto;
-}
-.mobileRight img {
-    float: right;
-    margin-right: 15%;
-}
-.mobileLeft {
-    float: left;
-    margin: 15em 0 0 10em;
-}
-.mobileLeft p {
-    font-size: 18px;
-    color: #182227;
-}
-.mobileLeft h1 {
-    color:darkolivegreen;
-}
-.mobileLeft a img {
-    margin-top:20px;
-}*/
 .last {
     margin-left: 1.5em;
-}
-.footer {
-    background-color: darkred;
-    display: flex;
-    height: 80px;
-    color: white;
-}
-.footer p {
-    margin-left: 20px;
-    font-size: 15px;
-}
-.footer a {
-    margin-left: 3em;
-    color:darkslategrey;
-    text-decoration: none;
-    font-size: 15px;
 }

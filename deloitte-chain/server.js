@@ -6,8 +6,7 @@ const BusinessNetworkConnection = require('composer-client').BusinessNetworkConn
 let connection = new BusinessNetworkConnection();
 var bodyParser = require('body-parser');
 var NS = 'org.deloitte.net';
-let factory, companyAccount, businessNetworkDefinition, companyRegistry, personRegistry, accountID;
-
+let factory, businessNetworkDefinition, companyRegistry, personRegistry, accountID;
 
 // Set up node server to listen on port 3000
 const PORT = 3000;
@@ -35,23 +34,31 @@ app.listen(PORT);
 app.post('/admin', function(req, res) {
   res.end('Success');
   var companyData = req.body;
-  // Stores Account ID numbers as Company ID numbers preceded by an 'a'
-  accountID = 'a' + companyData.ID;
-  addCompany(companyData);
+  // Parent company Account ID saved for recording transactions
+  accountID = 'a' + companyData.ID;   // Store Account ID numbers as Company ID numbers preceded by an 'a'
+  addCompany(companyData)then(function(result) {
+    res.send('Success');
+  });
 });
 
+// Listen for transactions data from HTML file
 app.post('/transactions', function(req, res) {
-  console.log(accountID);
   var sheet = req.body;
   addTransaction(sheet).then(function(result) {
     res.send('Success');
   });
 });
 
+// Send Company ID of parent for identification purposes
+app.get('/portal', function(req, res) {
+    var companyID = accountID.slice(1);
+    res.send(companyID);
+});
+
 /**
  * Add a company with provided identifying data to the network.
  * @param {Object} data The data for the added company (i.e. name, CEO, location)
- * @returns {String} The company's ID number on the network.
+ * @returns {Promise} Resolved with the updated Account registry.
   */
 async function addCompany(data) {
   var aID = 'a' + data.ID;
@@ -112,7 +119,7 @@ async function addCompany(data) {
 /**
  * Add an employee with provided identifying data to the network
  * @param {Object} data The data for the added employee (i.e. name, salary, title)
- * @returns {String} The employee's ID number on the network
+ * @returns {Promise} Resolved with the updated Account registry.
   */
 async function addEmployee(data) {
   var aID = 'a' + data.ID;
@@ -146,6 +153,7 @@ async function addEmployee(data) {
 /**
  * Add a transaction with provided identifying data to the network
  * @param {Object} data The data for the added transaction (i.e. amount, description, date)
+ * @returns {Promise} Resolved when the transaction has been successfuly added to the network
   */
 async function addTransaction(data) {
   var transaction;
