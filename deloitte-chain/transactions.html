@@ -55,19 +55,22 @@
         transactions = [];
       // Prevent nested subsidiaries and employees for simplicity (proof of concept)
       console.log(transactions);
-      var data = {
-        transactions: JSON.stringify(transactions),
-      };
-      console.log(data);
-      $.ajax({
-        url: '/transactions',
-        type: 'POST',
-        data: data,
-        success: function(id){
-          console.log(id);
+      var length = transactions.length;
+      if(length != 0) {
+        for(var i = 0; i < length; i++) {
+          $.ajax({
+            url: '/transactions',
+            type: 'POST',
+            data: transactions[i],
+            success: function(id){
+              console.log(id);
+              // Load blockchain user interface upon data upload
+              window.open('http://localhost:4200', '_self');
+          }});
+        }
+      }  else {
           window.open('http://localhost:4200', '_self');
-          // Load blockchain user interface upon data upload
-      }});
+      }
       // Queue loading screen to prevent further user input and server overload
     });
   });

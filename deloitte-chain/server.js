@@ -42,16 +42,8 @@ app.post('/admin', function(req, res) {
 
 app.post('/transactions', function(req, res) {
   console.log(accountID);
-  var sheet;
-  try {
-   sheet = JSON.parse(req.body.transactions);
-  } catch(e) {
-    sheet = req.body.transactions;
-  }
-  var length = sheet.length;
-  for(var i = 0; i < length; i++) {
-      addTransaction(sheet[i]); 
-  }
+  var sheet = req.body;
+  addTransaction(sheet);
 });
 
 /**
@@ -82,7 +74,7 @@ async function addCompany(data) {
   } catch(e) {
     parsed = data.employees;
   }
-  var length = parsed.length; 
+  var length = parsed.length;
   company.employees = [];
   for(var i = 0; i < length; i++) {
     // Keep record of employee ID numbers
