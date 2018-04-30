@@ -61,9 +61,10 @@
           $.ajax({
             url: '/transactions',
             type: 'POST',
+            async: false,
             data: transactions[i],
-            success: function(id){
-              console.log(id);
+            success: function(data){
+              console.log(data);
               // Load blockchain user interface upon data upload
           }});
         }

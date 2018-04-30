@@ -43,7 +43,9 @@ app.post('/admin', function(req, res) {
 app.post('/transactions', function(req, res) {
   console.log(accountID);
   var sheet = req.body;
-  addTransaction(sheet);
+  addTransaction(sheet).then(function(result) {
+    res.send('Success');
+  });
 });
 
 /**
@@ -179,5 +181,5 @@ async function addTransaction(data) {
     transaction.to = factory.newRelationship(NS, 'Account', accountID);
     transaction.amount = parseFloat(data.Credit.slice(1, -3).replace(/,/g , ''));
   }
-  setTimeout(connection.submitTransaction(transaction), 10000);
+  return connection.submitTransaction(transaction);
 }
