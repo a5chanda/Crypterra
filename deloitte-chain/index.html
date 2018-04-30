@@ -1,128 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
-  <script>
-  // Data to be read in from excel file
-  var subsidiaries, employees;
-  var count = 0;
-  /**
-   * Read in the uploaded excel file to a JSON object using SheetJS library
-   * @param {Event} e The event associated with the file upload
-    */
-  function handleFile(e) {
-        // Get the files from Upload control
-        var files = e.target.files;
-        var i, f;
-        // Loop through files
-        for (i = 0, f = files[i]; i != files.length; ++i) {
-            var reader = new FileReader();
-            var name = f.name;
-            reader.onload = function (e) {
-                var data = e.target.result;
-                var result;
-                var workbook = XLSX.read(data, { type: 'binary' });
-                var sheet_name_list = workbook.SheetNames;
-                sheet_name_list.forEach(function (y) { /* iterate through sheets */
-                    // Convert the cell value to Json
-                    var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
-                    // Read sheets into different objects depending on sheet number
-                    ++count;
-                    if(count == 2)
-                      subsidiaries = roa;
-                     else if(count == 3)
-                       employees = roa;
-                    if (roa.length > 0) {
-                        result = roa;
-                    }
-                });
-            };
-            reader.readAsArrayBuffer(f);
-        }
-    }
+    <title>Deloitte Crypto - Demo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 
-  $(document).ready(function(){
-    // Call handleFile function upon upload of files
-    $('#files').change(handleFile);
-
-    /**
-     * Take company data from user input and send over via HTTP request to node server
-     * @param {Event} e The event associated with the button click
-      */
-    $('#company').click(function(e) {
-      e.preventDefault()
-      // Get user input and bind them to sent data
-      var id = $('#id').val();
-      var name = $('#name').val();
-      var ceo = $('#ceo').val();
-      var description = $('#description').val();
-      var location = $('#location').val();
-      var btc = $('#btc').val();
-      var eth = $('#eth').val();
-      var cad = $('#cad').val();
-      var usd = $('#usd').val();
-      var gbp = $('#gbp').val();
-      // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
-      if(subsidiaries == null)
-        subsidiaries = [];
-      if(employees == null)
-        employees = [];
-      // Prevent nested subsidiaries and employees for simplicity (proof of concept)
-      var length = subsidiaries.length;
-      for(var i = 0; i < length; i++) {
-        subsidiaries[i].subsidiaries = [];
-        subsidiaries[i].employees = [];
-      }
-      var data = {
-        ID: id,
-        name: name,
-        ceo: ceo,
-        employees: JSON.stringify(employees),
-        description: description,
-        subsidiaries: JSON.stringify(subsidiaries),
-        location: location,
-        btcBalance: btc,
-        ethBalance: eth,
-        cadBalance: cad,
-        usdBalance: usd,
-        gbpBalance: gbp
-      };
-      console.log(data);
-      $.ajax({
-        url: '/admin',
-        type: 'POST',
-        data: data,
-        success: function(id){
-          console.log(id);
-          // Load blockchain user interface upon data upload
-          window.open('transactions.html', '_self');
-      }});
-      // Queue loading screen to prevent further user input and server overload
-    });
-  });
-</script>
 </head>
 <body>
-  <div class="container">
-    <p>Upload your company data in an excel file here.</p>
-    <input type="file" id="files" name="files"/>
-    <form>
-      <input id="name" type="text" placeholder="Company Name"></input><br>
-      <input id="id" type="text" placeholder="Company ID"></input><br>
-      <input id="ceo" type="text" placeholder="CEO Name"></input><br>
-      <input id="description" type="text" placeholder="Company Description"></input><br>
-      <input id="location" type="text" placeholder="Company Location"></input><br>
-      <input id="btc" type="text" placeholder="Bitcoin Balance"></input><br>
-      <input id="eth" type="text" placeholder="Ethereum Balance"></input><br>
-      <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
-      <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
-      <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
-      <button id="company">Send Data</button>
-  </div>
+    <div class="nav">
+        <a href="#" class="logo"><img src="images/Untitled-1.png" alt="pig logo" width="80px"></a>
+        <div class="textright">
+            <a href="#">Info</a>
+            <a href="#">Participants</a>
+            <a href="#">Transactions</a>
+            <a href="#">Assets</a>
+        </div>
+    </div> <!-- End Nav -->
+    <div class="landing">
+        <div class="landingWrapper clear fix">
+            <div class="landingLeft">
+            <img src="images/Untitled-1.png" alt="pig logo" width="280px">
+            </div>
+            <div class="landingRight">
+                <h1 class="bold">Blockchain Solution</h1>
+                <p>cooooooooooooooooooooooooool</p>
+                <a href="data.html" class="btn">Get Started</a>
+            </div>
+        </div>   
+    </div> <!-- End Landing -->
+    <div class="mobileApp">
+        <div class="mobileAppWrapper clearfix">
+            <div class="mobileLeft">
+                <h1 class="bold">Write something here</h1>
+                <p>good stuff wow look at this blockchain. <br>avaliable now</p>
+                <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
+                <a href="#"><img src="images/Untitled-1.png" alt="pig logo" width="150px"></a>
+            </div>
+            <div class="mobileRight">
+                <img src="images/Untitled-1.png" alt="pig logo" width="400px">
+            </div>
+        </div>
+    </div> <!-- End !!!!!!!!!!!!idk -->
+    <div class="footer">
+        <p>Copyright 2018 CUTC</p>
+        <a href="#" class="bold">Terms</a>
+        <a href="#" class="bold">Private Policy</a>
+    </div> <!-- End Footer -->
 </body>
-
-
 </html>

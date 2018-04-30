@@ -1,12 +1,12 @@
 // Require appropriate modules
 var http = require('http');
 var express = require('express');
+const delay = require('delay');
 const BusinessNetworkConnection = require('composer-client').BusinessNetworkConnection;
 let connection = new BusinessNetworkConnection();
 var bodyParser = require('body-parser');
 var NS = 'org.deloitte.net';
-let factory, companyAccount, businessNetworkDefinition,  companyRegistry, personRegistry;
-var accountID;
+let factory, companyAccount, businessNetworkDefinition, companyRegistry, personRegistry, accountID;
 
 
 // Set up node server to listen on port 3000
@@ -50,7 +50,7 @@ app.post('/transactions', function(req, res) {
   }
   var length = sheet.length;
   for(var i = 0; i < length; i++) {
-    addTransaction(sheet[i]);
+      addTransaction(sheet[i]); 
   }
 });
 
@@ -156,7 +156,6 @@ async function addEmployee(data) {
 async function addTransaction(data) {
   var transaction;
   var currency;
-  console.log(data);
   // Transfer between different accounts based on debit & credit transaction entries
   if(data.Credit == null)
     currency = data.Debit.slice(-3);
@@ -164,28 +163,29 @@ async function addTransaction(data) {
     currency = data.Credit.slice(-3);
   // Create transaction based on currency type
   if(currency.toUpperCase() === 'BTC')
-    transaction = await factory.newTransaction(NS, 'btcTransaction', data.ID);
+    transaction = factory.newTransaction(NS, 'btcTransaction', data.ID);
   else if(currency.toUpperCase() === 'ETH')
-    transaction = await factory.newTransaction(NS, 'ethTransaction', data.ID);
+    transaction = factory.newTransaction(NS, 'ethTransaction', data.ID);
   else if(currency.toUpperCase() === 'CAD')
-    transaction = await factory.newTransaction(NS, 'cadTransaction', data.ID);
+    transaction = factory.newTransaction(NS, 'cadTransaction', data.ID);
   else if(currency.toUpperCase() === 'USD')
-    transaction = await factory.newTransaction(NS, 'usdTransaction', data.ID);
+    transaction = factory.newTransaction(NS, 'usdTransaction', data.ID);
   else if(currency.toUpperCase() === 'GBP')
-    transaction = await factory.newTransaction(NS, 'gbpTransaction', data.ID);
+    transaction = factory.newTransaction(NS, 'gbpTransaction', data.ID);
+  transaction.transactionId = data.ID;
   transaction.transactionID = data.ID;
   transaction.date = data.Date;
   transaction.description = data.Description;
 
   if(data.Credit == null) {
-    transaction.from = await factory.newRelationship(NS, 'Account', accountID);
-    transaction.to = await factory.newRelationship(NS, 'Account', data.ParticipantID);
+    transaction.from = factory.newRelationship(NS, 'Account', accountID);
+    transaction.to = factory.newRelationship(NS, 'Account', data.ParticipantID);
     transaction.amount = parseFloat(data.Debit.slice(1, -3).replace(/,/g , '')); // Remove currency and commas from number
   }
   else {
-    transaction.from = await factory.newRelationship(NS, 'Account', data.ParticipantID);
-    transaction.to = await factory.newRelationship(NS, 'Account', accountID);
+    transaction.from = factory.newRelationship(NS, 'Account', data.ParticipantID);
+    transaction.to = factory.newRelationship(NS, 'Account', accountID);
     transaction.amount = parseFloat(data.Credit.slice(1, -3).replace(/,/g , ''));
   }
-  return await connection.submitTransaction(transaction);
+  setTimeout(connection.submitTransaction(transaction), 10000);
 }
