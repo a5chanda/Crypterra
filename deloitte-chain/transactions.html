@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
   <script>
   // Data to be read in from excel file
-  var subsidiaries, employees;
+  var transactions;
   var count = 0;
   /**
    * Read in the uploaded excel file to a JSON object using SheetJS library
@@ -30,11 +30,7 @@
                     // Convert the cell value to Json
                     var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
                     // Read sheets into different objects depending on sheet number
-                    ++count;
-                    if(count == 2)
-                      subsidiaries = roa;
-                     else if(count == 3)
-                       employees = roa;
+                      transactions = roa;
                     if (roa.length > 0) {
                         result = roa;
                     }
@@ -54,51 +50,22 @@
       */
     $('#company').click(function(e) {
       e.preventDefault()
-      // Get user input and bind them to sent data
-      var id = $('#id').val();
-      var name = $('#name').val();
-      var ceo = $('#ceo').val();
-      var description = $('#description').val();
-      var location = $('#location').val();
-      var btc = $('#btc').val();
-      var eth = $('#eth').val();
-      var cad = $('#cad').val();
-      var usd = $('#usd').val();
-      var gbp = $('#gbp').val();
       // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
-      if(subsidiaries == null)
-        subsidiaries = [];
-      if(employees == null)
-        employees = [];
+      if(transactions == null)
+        transactions = [];
       // Prevent nested subsidiaries and employees for simplicity (proof of concept)
-      var length = subsidiaries.length;
-      for(var i = 0; i < length; i++) {
-        subsidiaries[i].subsidiaries = [];
-        subsidiaries[i].employees = [];
-      }
+      console.log(transactions);
       var data = {
-        ID: id,
-        name: name,
-        ceo: ceo,
-        employees: JSON.stringify(employees),
-        description: description,
-        subsidiaries: JSON.stringify(subsidiaries),
-        location: location,
-        btcBalance: btc,
-        ethBalance: eth,
-        cadBalance: cad,
-        usdBalance: usd,
-        gbpBalance: gbp
+        transactions: JSON.stringify(transactions),
       };
       console.log(data);
       $.ajax({
-        url: '/admin',
+        url: '/transactions',
         type: 'POST',
         data: data,
         success: function(id){
           console.log(id);
           // Load blockchain user interface upon data upload
-          window.open('transactions.html', '_self');
       }});
       // Queue loading screen to prevent further user input and server overload
     });
@@ -107,19 +74,8 @@
 </head>
 <body>
   <div class="container">
-    <p>Upload your company data in an excel file here.</p>
+    <p>Upload your transactions in an excel file here.</p>
     <input type="file" id="files" name="files"/>
-    <form>
-      <input id="name" type="text" placeholder="Company Name"></input><br>
-      <input id="id" type="text" placeholder="Company ID"></input><br>
-      <input id="ceo" type="text" placeholder="CEO Name"></input><br>
-      <input id="description" type="text" placeholder="Company Description"></input><br>
-      <input id="location" type="text" placeholder="Company Location"></input><br>
-      <input id="btc" type="text" placeholder="Bitcoin Balance"></input><br>
-      <input id="eth" type="text" placeholder="Ethereum Balance"></input><br>
-      <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
-      <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
-      <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
       <button id="company">Send Data</button>
   </div>
 </body>

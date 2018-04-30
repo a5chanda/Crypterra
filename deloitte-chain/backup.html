@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
   <script>
   // Data to be read in from excel file
-  var subsidiaries, employees;
+  var transactions, subsidiaries, employees;
   var count = 0;
   /**
    * Read in the uploaded excel file to a JSON object using SheetJS library
@@ -31,7 +31,9 @@
                     var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
                     // Read sheets into different objects depending on sheet number
                     ++count;
-                    if(count == 2)
+                    if(count == 1)
+                      transactions = roa;
+                    else if(count == 2)
                       subsidiaries = roa;
                      else if(count == 3)
                        employees = roa;
@@ -68,6 +70,8 @@
       // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
       if(subsidiaries == null)
         subsidiaries = [];
+      if(transactions == null)
+        transactions = [];
       if(employees == null)
         employees = [];
       // Prevent nested subsidiaries and employees for simplicity (proof of concept)
@@ -77,6 +81,7 @@
         subsidiaries[i].employees = [];
       }
       var data = {
+        transactions: JSON.stringify(transactions),
         ID: id,
         name: name,
         ceo: ceo,
@@ -98,7 +103,13 @@
         success: function(id){
           console.log(id);
           // Load blockchain user interface upon data upload
-          window.open('transactions.html', '_self');
+          $.ajax({
+            url: 'http://localhost:4200/portal',
+            type: 'POST',
+            data: id,
+            success: function(data){
+          }});
+          window.open('http://localhost:4200', '_self');
       }});
       // Queue loading screen to prevent further user input and server overload
     });
