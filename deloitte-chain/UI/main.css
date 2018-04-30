@@ -1,7 +1,9 @@
 html {
-    font-family: basic sans, sans-serif;
     font-weight: 300;
 }
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -11,9 +13,18 @@ html {
     vertical-align: baseline;
 }
 html, body {
+    font-family: roboto;
     width: 100%;
 }
+
+@font-face {
+    font-family: 'roboto';
+    src: url(fonts/Roboto-Regular.ttf);
+    font-style: normal;
+    font-weight: 100;
+}
 h1 {
+    font-family: 'roboto';
     font-size: 23px;
     color: white;
 }
