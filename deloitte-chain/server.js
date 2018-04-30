@@ -49,12 +49,6 @@ app.post('/transactions', function(req, res) {
   });
 });
 
-// Send Company ID of parent for identification purposes
-app.get('/portal', function(req, res) {
-    var companyID = accountID.slice(1);
-    res.send(companyID);
-});
-
 /**
  * Add a company with provided identifying data to the network.
  * @param {Object} data The data for the added company (i.e. name, CEO, location)
