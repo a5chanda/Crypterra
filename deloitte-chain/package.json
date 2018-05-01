@@ -14,8 +14,6 @@
     "postlint": "npm run licchk",
     "licchk": "license-check",
     "postlicchk": "npm run doc",
-    "angular": "cd angular-app && npm start",
-    "start": "concurrently \"node server.js\" \"npm run angular\"",
     "doc": "jsdoc --pedantic --recurse -c jsdoc.conf"
   },
   "repository": {

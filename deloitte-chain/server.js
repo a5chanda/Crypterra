@@ -36,7 +36,7 @@ app.post('/admin', function(req, res) {
   var companyData = req.body;
   // Parent company Account ID saved for recording transactions
   accountID = 'a' + companyData.ID;   // Store Account ID numbers as Company ID numbers preceded by an 'a'
-  addCompany(companyData)then(function(result) {
+  addCompany(companyData).then(function(result) {
     res.send('Success');
   });
 });
