@@ -2,10 +2,13 @@
 <html>
 <head>
   <title>Crypterra</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/get.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+  <script type="text/javascript" src="js/started.js"></script>
   <script>
   // Data to be read in from excel file
   var subsidiaries, employees;
@@ -107,20 +110,44 @@
 </head>
 <body>
   <div class="container">
-    <p>Upload your company data in an excel file here.</p>
-    <input type="file" id="files" name="files"/>
-    <form>
-      <input id="name" type="text" placeholder="Company Name"></input><br>
-      <input id="id" type="text" placeholder="Company ID"></input><br>
-      <input id="ceo" type="text" placeholder="CEO Name"></input><br>
-      <input id="description" type="text" placeholder="Company Description"></input><br>
-      <input id="location" type="text" placeholder="Company Location"></input><br>
-      <input id="btc" type="text" placeholder="Bitcoin Balance"></input><br>
-      <input id="eth" type="text" placeholder="Ethereum Balance"></input><br>
-      <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
-      <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
-      <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
-      <button id="company">Next</button>
+    <form id="msform">
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li class="active">Parent Company Info</li>
+        <li>Balances</li>
+        <li>Upload Data</li>
+      </ul>
+      <!-- fieldsets -->
+      <fieldset>
+        <h2 class="fs-title">Welcome!</h2>
+        <h3 class="fs-subtitle"></h3>
+        <input id="name" type="text" name="name" placeholder="Company Name" />
+        <input id="id" type="text" name="id" placeholder="Company ID" />
+        <input id="ceo" type="text" name="ceo" placeholder="CEO Name" />
+        <input id="description" type="text" name="employees" placeholder="Employee Size" />
+        <input id="location" type="text" name="industry" placeholder="Industry" />
+        <input type="text" name="location" placeholder="Company Location" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+      </fieldset>
+      <fieldset>
+        <h2 class="fs-title">Balances</h2>
+        <h3 class="fs-subtitle">Let us help you handle five different currencies!</h3>
+        <input id="cad" type="number" name="can" placeholder="Canadian Dollar (CAN)" />
+        <input id="usd" type="number" name="usd" placeholder="American Dollar (USD)" />
+        <input id="gbp" type="number" name="gbp" placeholder="British Pound (GBP)" />
+        <input id="btc" type="number" name="btc" placeholder="Bitcoin (BTC)" />
+        <input id="eth" type="number" name="eth" placeholder="Ethereum (ETH)" />
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+      </fieldset>
+      <fieldset>
+        <h2 class="fs-title">Transfer Data</h2>
+        <h3 class="fs-subtitle">Upload pre-existing Excel file here, it's that simple!</h3>
+        <input type="file" id="files" name="files"/>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input id="company" type="button" name="submit" class="submit action-button" value="Submit" />
+      </fieldset>
+    </form>
   </div>
 </body>
 </html>

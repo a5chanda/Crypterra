@@ -3,7 +3,10 @@
 <head>
   <title>Crypterra</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/get.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+  <script type="text/javascript" src="js/started.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
   <script>
@@ -77,9 +80,14 @@
 </head>
 <body>
   <div class="container">
-    <p>Upload your transactions in an excel file here.</p>
-    <input type="file" id="files" name="files"/>
-      <button id="company">Send to Blockchain</button>
+    <form id="msform">
+      <fieldset>
+        <h2 class="fs-title">Upload Transactions</h2>
+        <h3 class="fs-subtitle">Upload pre-existing Excel file here, it's that simple!</h3>
+        <input type="file" id="files" name="files"/>
+        <input id="company" type="button" name="submit" class="submit action-button" value="Upload"/>
+      </fieldset>
+    </form>
   </div>
 </body>
 </html>
