@@ -72,7 +72,6 @@ async function addCompany(data) {
   company.description = data.description;
   company.location = data.location;
   var parsed;
-  // Convert from JSON only if excel file was uploaded
   try {
     parsed = JSON.parse(data.employees);
   } catch(e) {
@@ -102,6 +101,7 @@ async function addCompany(data) {
   // Link owning company with account using identifier
   company.acc = await factory.newRelationship(NS, 'Account', account.$identifier);
   // Add employees and accounts to respective registries
+
   await companyRegistry.add(company).catch(function(err) {
     console.log(err);
   });
@@ -172,7 +172,7 @@ async function addTransaction(data) {
   transaction.transactionID = data.ID;
   transaction.date = data.Date;
   transaction.description = data.Description;
-  // Transfer between different accounts based on debit & credit transaction entries
+ // Transfer between different accounts based on debit & credit transaction entries
   if(data.Credit == null) {
     transaction.from = factory.newRelationship(NS, 'Account', accountID);
     transaction.to = factory.newRelationship(NS, 'Account', data.ParticipantID);

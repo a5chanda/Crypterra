@@ -47,6 +47,8 @@ enum Owner{
   o Employee
 }
 
+// Both Companies and Employees have an account with 5 balances
+
 asset Account identified by AccountID {
   o String AccountID //Account ID: 'a' + companyID
   o Owner owner
