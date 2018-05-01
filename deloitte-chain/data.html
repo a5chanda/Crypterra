@@ -93,6 +93,7 @@
       };
       console.log(data);
       $.ajax({
+        // Send via POST request to node server to add to blockchain
         url: '/admin',
         type: 'POST',
         data: data,
@@ -119,9 +120,7 @@
       <input id="cad" type="text" placeholder="Canadian Dollar Balance"></input><br>
       <input id="usd" type="text" placeholder="American Dollar Balance"></input><br>
       <input id="gbp" type="text" placeholder="British Pound Balance"></input><br>
-      <button id="company">Send Data</button>
+      <button id="company">Next</button>
   </div>
 </body>
-
-
 </html>
