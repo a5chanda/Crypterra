@@ -15,6 +15,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { btcTransactionService } from './btcTransaction.service';
+import { UUID } from 'angular2-uuid';
 import 'rxjs/add/operator/toPromise';
 @Component({
 	selector: 'app-btcTransaction',
@@ -186,11 +187,11 @@ export class btcTransactionComponent implements OnInit {
         
       
         
-          "transactionId":this.transactionId.value,
+         // "transactionId":UUID.UUID(),
         
       
         
-          "timestamp":this.timestamp.value
+          //"timestamp": new Date().toISOString()
         
       
     };
@@ -233,7 +234,8 @@ export class btcTransactionComponent implements OnInit {
 
     return this.servicebtcTransaction.addTransaction(this.Transaction)
     .toPromise()
-    .then(() => {
+    .then((result) => {
+      console.log("memes" + result);
 			this.errorMessage = null;
       this.myForm.setValue({
       

@@ -186,11 +186,11 @@ export class cadTransactionComponent implements OnInit {
         
       
         
-          "transactionId":this.transactionId.value,
+          //"transactionId":this.transactionId.value,
         
       
         
-          "timestamp":this.timestamp.value
+          //"timestamp":this.timestamp.value
         
       
     };
@@ -233,7 +233,8 @@ export class cadTransactionComponent implements OnInit {
 
     return this.servicecadTransaction.addTransaction(this.Transaction)
     .toPromise()
-    .then(() => {
+    .then((result) => {
+      console.log("memes" + result);
 			this.errorMessage = null;
       this.myForm.setValue({
       

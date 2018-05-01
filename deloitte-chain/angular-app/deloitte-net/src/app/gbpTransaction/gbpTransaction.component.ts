@@ -186,11 +186,11 @@ export class gbpTransactionComponent implements OnInit {
         
       
         
-          "transactionId":this.transactionId.value,
+          //"transactionId":this.transactionId.value,
         
       
         
-          "timestamp":this.timestamp.value
+          //"timestamp":this.timestamp.value
         
       
     };
@@ -233,7 +233,8 @@ export class gbpTransactionComponent implements OnInit {
 
     return this.servicegbpTransaction.addTransaction(this.Transaction)
     .toPromise()
-    .then(() => {
+    .then((result) => {
+      console.log(result);
 			this.errorMessage = null;
       this.myForm.setValue({
       

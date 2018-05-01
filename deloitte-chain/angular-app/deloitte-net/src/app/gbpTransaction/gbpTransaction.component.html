@@ -72,38 +72,14 @@
                   <input formControlName="date" type="text" class="form-control">
                 
               </div>
-            
-          
-
-            
+                      
               <div class="form-group text-left">
                 <label for="description">description</label>
                 
                   <input formControlName="description" type="text" class="form-control">
                 
               </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="transactionId">transactionId</label>
-                
-                  <input formControlName="transactionId" type="text" class="form-control">
-                
-              </div>
-            
-          
-
-            
-              <div class="form-group text-left">
-                <label for="timestamp">timestamp</label>
-                
-                  <input formControlName="timestamp" type="text" class="form-control">
-                
-              </div>
-            
-          
+               
 
         </div>
         <div class="modal-footer">
@@ -261,38 +237,18 @@
         <h1 class="transaction-title" id='transactionName'>gbpTransaction</h1>
     </div>
     <div class="col-md-3">
+        <button (click)="resetForm()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTransactionModal">
+            <span style="font-size: 14px;font-family: inherit;border-right:1px solid rgba(255,255,255,0.5);padding-right:0.6em;margin-right:0.5em;vertical-align:middle;">
+                <svg class="plus-svg" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                  <path fill-rule="evenodd" d="M5.5,4.5 L9.5,4.5 L10,4.5 L10,5.5 L9.5,5.5 L5.5,5.5 L5.5,9.5 L5.5,10 L4.5,10 L4.5,9.5 L4.5,5.5 L0.5,5.5 L0,5.5 L0,4.5 L0.5,4.5 L4.5,4.5 L4.5,0.5 L4.5,0 L5.5,0 L5.5,0.5 L5.5,4.5 Z"/>
+                </svg>
+            </span>
+          Add Transaction
+        </button>
     </div>
   </div>
   <br>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-12">
-          When invoked, this transaction will have the following attributes:
-          <br>
-          <ul>
-            
-              <li><span class="attribute"><b>from</b></span></li>
-            
-              <li><span class="attribute"><b>to</b></span></li>
-            
-              <li><span class="attribute"><b>amount</b></span></li>
-            
-              <li><span class="attribute"><b>transactionID</b></span></li>
-            
-              <li><span class="attribute"><b>date</b></span></li>
-            
-              <li><span class="attribute"><b>description</b></span></li>
-            
-              <li><span class="attribute"><b>transactionId</b></span></li>
-            
-              <li><span class="attribute"><b>timestamp</b></span></li>
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <div class="row">
     <div class="col-md-12">
       <table class="table table-responsive">
