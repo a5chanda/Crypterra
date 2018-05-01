@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deloitte Crypto - Demo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="get.css">
+
+</head>
+<!-- multistep form -->
+<form id="msform">
+  <!-- progressbar -->
+  <ul id="progressbar">
+    <li class="active">Parent Company Info</li>
+    <li>Balances</li>
+    <li>Upload Data</li>
+  </ul>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">Welcome!</h2>
+    <h3 class="fs-subtitle"></h3>
+    <input type="text" name="name" placeholder="Company Name" />
+    <input type="text" name="id" placeholder="Company ID" />
+    <input type="text" name="ceo" placeholder="CEO Name" />
+    <input type="text" name="employees" placeholder="Employee Size" />
+    <input type="text" name="industry" placeholder="Industry" />
+    <input type="text" name="location" placeholder="Company Location" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Balances</h2>
+    <h3 class="fs-subtitle">Let us help you handle five different currencies!</h3>
+    <input type="number" name="can" placeholder="Canadian Dollar (CAN)" />
+    <input type="number" name="usd" placeholder="American Dollar (USD)" />
+    <input type="number" name="gbp" placeholder="British Pound (GBP)" />
+    <input type="number" name="btc" placeholder="Bitcoin (BTC)" />
+    <input type="number" name="eth" placeholder="Ethereum (ETH)" />
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Transfer Data</h2>
+    <h3 class="fs-subtitle">Upload pre-existing Excel file here, it's that simple!</h3>
+    <input type="file" id="files" name="files"/>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+  </fieldset>
+</form>
+</html>
