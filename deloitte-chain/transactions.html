@@ -30,7 +30,6 @@
                 sheet_name_list.forEach(function (y) { /* iterate through sheets */
                     // Convert the cell value to Json
                     var roa = XLSX.utils.sheet_to_json(workbook.Sheets[y]);
-                    // Read sheets into different objects depending on sheet number
                       transactions = roa;
                     if (roa.length > 0) {
                         result = roa;
@@ -54,12 +53,12 @@
       // Default values to empty arrays if no excel file is uploaded to accomodate blockchain model
       if(transactions == null)
         transactions = [];
-      // Prevent nested subsidiaries and employees for simplicity (proof of concept)
       console.log(transactions);
       var length = transactions.length;
       if(length != 0) {
         for(var i = 0; i < length; i++) {
           $.ajax({
+            // Send via POST request to node server to add to blockchain
             url: '/transactions',
             type: 'POST',
             async: false,
@@ -80,9 +79,7 @@
   <div class="container">
     <p>Upload your transactions in an excel file here.</p>
     <input type="file" id="files" name="files"/>
-      <button id="company">Send Data</button>
+      <button id="company">Send to Blockchain</button>
   </div>
 </body>
-
-
 </html>
