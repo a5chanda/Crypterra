@@ -11,11 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 .container-fluid {
     display: grid;
     margin-left: 72px;
     padding-left: 0px;
+}
+
+*{
+    font-family: 'Nunito', sans-serif !important;
+
 }
 
 .navbar {

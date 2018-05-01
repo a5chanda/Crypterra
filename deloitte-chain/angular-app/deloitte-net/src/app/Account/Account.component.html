@@ -22,112 +22,108 @@
       <form [formGroup]="myForm">
         <div class="modal-body">
 
-
-          
-
-            
               <div class="form-group text-left">
                 <label for="AccountID">AccountID</label>
-                
-                  <input formControlName="AccountID" type="text" class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="AccountID" type="text" class="form-control">
+
+              </div>
+
+
+
+
               <label for="owner">owner</label>
               <div class="checkbox">
-                
+
                   <label>
                     <input
-                      
+
                         formControlName="owner"
-                      
+
                       name="owner"
                       value="Company"
                       type="radio"
-                      
+
                     />
                     Company
                   </label>
-                
+
                   <label>
                     <input
-                      
+
                         formControlName="owner"
-                      
+
                       name="owner"
                       value="Employee"
                       type="radio"
-                      
+
                     />
                     Employee
                   </label>
-                
-              </div>
-            
-          
 
-            
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="ownerID">ownerID</label>
-                
-                  <input formControlName="ownerID" type="text" class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="ownerID" type="text" class="form-control">
+
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="balanceBTC">balanceBTC</label>
-                
-                  <input formControlName="balanceBTC" type="number" step='any' class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="balanceBTC" type="number" step='any' class="form-control">
+
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="balanceETH">balanceETH</label>
-                
-                  <input formControlName="balanceETH" type="number" step='any' class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="balanceETH" type="number" step='any' class="form-control">
+
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="balanceUSD">balanceUSD</label>
-                
-                  <input formControlName="balanceUSD" type="number" step='any' class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="balanceUSD" type="number" step='any' class="form-control">
+
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="balanceCAD">balanceCAD</label>
-                
-                  <input formControlName="balanceCAD" type="number" step='any' class="form-control">
-                
-              </div>
-            
-          
 
-            
+                  <input formControlName="balanceCAD" type="number" step='any' class="form-control">
+
+              </div>
+
+
+
+
               <div class="form-group text-left">
                 <label for="balanceGBP">balanceGBP</label>
-                
+
                   <input formControlName="balanceGBP" type="number" step='any' class="form-control">
-                
+
               </div>
-            
-          
+
+
 
         </div>
         <div class="modal-footer">
@@ -154,113 +150,113 @@
         <div class="modal-body">
 
 
-          
+
             <div class="form-group text-left">
               <label for="AccountID">AccountID</label>
-              
-              
-                <input [ngModel]="AccountID" formControlName="AccountID" class="form-control" disabled="disabled">  
-              
+
+
+                <input [ngModel]="AccountID" formControlName="AccountID" class="form-control" disabled="disabled">
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="owner">owner</label>
-              
-              
-                
+
+
+
                   <div class="row">
                     <div class="col-xs-12 checkbox">
-                    
+
                       <label>
                         <input
-                          
+
                             formControlName="owner"
                             [ngModel]="owner"
-                          
+
                           name="owner"
                           value="Company"
                           type="radio"
-                          
+
                         />
                         Company
                       </label>
-                    
+
                       <label>
                         <input
-                          
+
                             formControlName="owner"
                             [ngModel]="owner"
-                          
+
                           name="owner"
                           value="Employee"
                           type="radio"
-                          
+
                         />
                         Employee
                       </label>
-                    
+
                     </div>
                   </div>
-                
-              
+
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="ownerID">ownerID</label>
-              
-              
+
+
                 <input [ngModel]="ownerID"formControlName="ownerID" type="text" class="form-control">
-              
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="balanceBTC">balanceBTC</label>
-              
-              
+
+
                 <input [ngModel]="balanceBTC" formControlName="balanceBTC" type="number" step='any' class="form-control">
-              
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="balanceETH">balanceETH</label>
-              
-              
+
+
                 <input [ngModel]="balanceETH" formControlName="balanceETH" type="number" step='any' class="form-control">
-              
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="balanceUSD">balanceUSD</label>
-              
-              
+
+
                 <input [ngModel]="balanceUSD" formControlName="balanceUSD" type="number" step='any' class="form-control">
-              
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="balanceCAD">balanceCAD</label>
-              
-              
+
+
                 <input [ngModel]="balanceCAD" formControlName="balanceCAD" type="number" step='any' class="form-control">
-              
+
 
             </div>
-          
+
             <div class="form-group text-left">
               <label for="balanceGBP">balanceGBP</label>
-              
-              
+
+
                 <input [ngModel]="balanceGBP" formControlName="balanceGBP" type="number" step='any' class="form-control">
-              
+
 
             </div>
-          
+
 
 
         </div>
@@ -309,7 +305,7 @@
 	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
 		<strong>Error:</strong> {{errorMessage}}
 	</div>
-  
+
   <div class="row">
     <div class="col-md-9">
         <h1 class="asset-title" id='assetName'>Account</h1>
@@ -331,46 +327,46 @@
       <table class="table table-responsive">
         <thead class="thead">
           <tr class="thead-cols">
-            
+
                 <th class="info">AccountID</th>
-            
+
                 <th class="info">owner</th>
-            
+
                 <th class="info">ownerID</th>
-            
+
                 <th class="info">balanceBTC</th>
-            
+
                 <th class="info">balanceETH</th>
-            
+
                 <th class="info">balanceUSD</th>
-            
+
                 <th class="info">balanceCAD</th>
-            
+
                 <th class="info">balanceGBP</th>
-            
+
               <th class="info-actions">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let asset of allAssets">
 
-            
+
                 <td class="asset-properties">{{asset.AccountID}}</td>
-            
+
                 <td class="asset-properties">{{asset.owner}}</td>
-            
+
                 <td class="asset-properties">{{asset.ownerID}}</td>
-            
+
                 <td class="asset-properties">{{asset.balanceBTC}}</td>
-            
+
                 <td class="asset-properties">{{asset.balanceETH}}</td>
-            
+
                 <td class="asset-properties">{{asset.balanceUSD}}</td>
-            
+
                 <td class="asset-properties">{{asset.balanceCAD}}</td>
-            
+
                 <td class="asset-properties">{{asset.balanceGBP}}</td>
-            
+
             <td>
               <button (click)="getForm(asset.AccountID);" type="button" class="btn btn-update" data-toggle="modal" data-target="#updateAssetModal">
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

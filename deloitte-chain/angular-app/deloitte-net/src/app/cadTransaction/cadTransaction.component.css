@@ -2,9 +2,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,7 +39,7 @@
     background: #FFF;
 }
 .modal-title {
-    font-family: inherit;
+    font-family: 'Nunito', sans-serif;
     font-size: 24px;
     color: #4E4E4E;
     letter-spacing: 0.28px;
@@ -72,7 +72,7 @@
     color: #393939;
     height: 42px;
     border: 1px solid #ffffff;
-    box-shadow: inset 0 0px 0px rgba(0,0,0,.075); 
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075);
     border-radius: 4px;
     resize: none;
 
@@ -121,8 +121,8 @@ label {
 }
 .btn-default:focus{
     background-color: #fff;
-    border-color: #4d21a8;  
-    color: #4d21a8;      
+    border-color: #4d21a8;
+    color: #4d21a8;
 }
 .transaction-title{
     font-family: inherit;
@@ -161,18 +161,15 @@ label {
     fill: currentColor;
 }
 
-/***.transaction-properties:hover, .transaction-properties:hover span{  
+/***.transaction-properties:hover, .transaction-properties:hover span{
 overflow: visible;
 position: relative;
- make readable design 
+ make readable design
 background-color: #FFFFFF;
 border: 1px solid #FFFFFF;
 border-radius: 4px;
 padding: 3px;
-/* compensate padding and border size to avoid jerking 
+/* compensate padding and border size to avoid jerking
 margin-left: -4px;
 }
 ***/
-
-
-

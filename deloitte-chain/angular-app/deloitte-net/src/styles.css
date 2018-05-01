@@ -12,3 +12,14 @@
  * limitations under the License.
  */
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+*{
+    font-family: 'Nunito', sans-serif !important;
+
+}
+
+img{
+	width: 200px !important;
+}
