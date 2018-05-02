@@ -1,6 +1,6 @@
 # Crypterra
 
-Crypterra is a business-first asset management platform that utilizes the Hyperledger Composer and Fabric frameworks to securely hold assets and records on a decentralized blockchain platform. As an extension of Hyperledger’s enterprise-friendly open-source structure, Crypterra caters to new businesses unfamiliar with blockchain technology by providing them with a convenient and user-friendly data upload system, which supports upload of data from Excel spreadsheets, which is then parsed and added to the Hyperledger network.
+Crypterra is a business-first asset management platform that utilizes the Hyperledger Composer and Fabric frameworks to securely hold assets and records on a decentralized blockchain platform. As an extension of Hyperledgerâ€™s enterprise-friendly open-source structure, Crypterra caters to new businesses unfamiliar with blockchain technology by providing them with a convenient and user-friendly data upload system, which supports upload of data from Excel spreadsheets, which is then parsed and added to the Hyperledger network. Additionally, the Crypterra platform creates an account and identity for every company and employee after parsing the information it receives from the excel worksheet. This allows for companies and employees alike to transact amongst 5 currencies (BTC, ETH, CAD, USD, GBP) within the platform and have their balances reflect accordingly.
 
 ## Setup
 
@@ -77,7 +77,7 @@ The Angular application will be running at localhost:4200 (for viewing added tra
 
 ### 6. User Interface
 
-Once at the landing page, click ‘Get Started’, and enter company info. For the excel spreadsheets, we’ve provided examples. Use ‘properties.xlsx’ followed by ‘transactions.xlsx’.
+Once at the landing page, click â€˜Get Startedâ€™, and enter company info. For the excel spreadsheets, weâ€™ve provided examples. Use â€˜properties.xlsxâ€™ followed by â€˜transactions.xlsxâ€™.
 
 ### 6. Stopping the app
 At the end of your session, stop fabric:
