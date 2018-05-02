@@ -1,12 +1,12 @@
-html {
-    font-family: basic sans, sans-serif;
-    font-weight: 300;
-}
+
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 * {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif !important;
     font-size: 100%;
     vertical-align: baseline;
 }
+
 html, body {
     width: 100%;
 }
